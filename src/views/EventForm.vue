@@ -61,6 +61,7 @@ export default {
   },
   methods: {
     saveEvent() {
+      console.log(this.files)
       Promise.all(
         this.files.map((file) => {
           return EventService.uploadFile(file)
@@ -75,7 +76,7 @@ export default {
           .then((response) => {
             console.log(response)
             this.$router.push({
-              name: 'EventLayoutView',
+              name: 'EventDetails',
               params: { id: response.data.id }
             })
             this.GStore.flashMessage =
