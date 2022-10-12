@@ -55,11 +55,19 @@ export default {
         location: '',
         organizer: { id: '', name: '' }
       },
-      files:[]
+      files: []
     }
   },
   methods: {
     saveEvent() {
+      Promise.all(
+        this.files.map((file) => {
+          return EventService.uploadFile(file)
+        })
+      ).then((response) => {
+        console.log(response)
+        console.log('finish upload file')
+      })
       EventService.saveEvent(this.event)
         .then((response) => {
           console.log(response)
